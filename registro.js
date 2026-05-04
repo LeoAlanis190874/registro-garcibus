@@ -19,11 +19,17 @@ await page.locator('input[type="text"], input:not([type="hidden"])').first().fil
   await page.waitForSelector('select', { timeout: 15000 });
   await page.waitForTimeout(1000);
 
-  console.log('Seleccionando IDA 05:00...');
-  await page.locator('select').first().selectOption({ label: /05:00/ });
-
-  console.log('Seleccionando REGRESO 16:10...');
-  await page.locator('select').nth(1).selectOption({ label: /16:10/ });
+  await page.evaluate(() => {
+  const selects = document.querySelectorAll('select');
+  const ida = selects[0];
+  for (let opt of ida.options) {
+    if (opt.text.includes('05:00')) { ida.value = opt.value; ida.dispatchEvent(new Event('change', { bubbles: true })); break; }
+  }
+  const regreso = selects[1];
+  for (let opt of regreso.options) {
+    if (opt.text.includes('16:10')) { regreso.value = opt.value; regreso.dispatchEvent(new Event('change', { bubbles: true })); break; }
+  }
+});
 
   await page.screenshot({ path: 'seleccionado.png', fullPage: true });
 
