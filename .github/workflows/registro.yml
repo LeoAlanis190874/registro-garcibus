@@ -1,0 +1,38 @@
+name: Registro Garcibus
+
+on:
+  workflow_dispatch:
+
+jobs:
+  registro:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Instalar navegador Playwright
+        run: npx playwright install chromium --with-deps
+
+      - name: Correr script de registro
+        run: node registro.js
+
+      - name: Subir QR y screenshot como artefacto
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qr-registro
+          path: |
+            *.png
+            *.jpg
+            *.jpeg
+            *.pdf
+          retention-days: 7
