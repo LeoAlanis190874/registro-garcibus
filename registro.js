@@ -10,8 +10,8 @@ const fs = require('fs');
   await page.goto('https://garcibus-production.up.railway.app/', { waitUntil: 'networkidle' });
 
   console.log('Ingresando CURP...');
-  await page.locator('input').first().fill('AAML081030HNLLNNA8');
-
+await page.locator('input[type="text"], input:not([type="hidden"])').first().fill('AAML081030HNLLNNA8');
+  
   console.log('Clic en Ingresar...');
   await page.getByText('Ingresar al Sistema').click();
 
