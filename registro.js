@@ -58,7 +58,11 @@ await page.locator('input[type="text"], input:not([type="hidden"])').first().fil
       console.log('QR capturado como screenshot');
     }
   }
-
+console.log('Enviando QR por WhatsApp...');
+  const imageUrl = 'https://raw.githubusercontent.com/LeoAlanis190874/registro-garcibus/main/qr_boleto.png';
+  const mensaje = encodeURIComponent('🚌 Tu boleto GarciBús está listo! Abre este link para ver tu QR: ' + imageUrl);
+  await fetch(`https://api.callmebot.com/whatsapp.php?phone=5215660519285&text=${mensaje}&apikey=8925663`);
+  console.log('WhatsApp enviado');
   await browser.close();
   console.log('✅ Listo');
 })();
