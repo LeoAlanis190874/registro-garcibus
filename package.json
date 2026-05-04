@@ -1,0 +1,12 @@
+{
+  "name": "registro-garcibus",
+  "version": "1.0.0",
+  "description": "Automatización de registro en Garcibus",
+  "main": "registro.js",
+  "scripts": {
+    "start": "node registro.js"
+  },
+  "dependencies": {
+    "playwright": "^1.44.0"
+  }
+}
