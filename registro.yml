@@ -25,14 +25,13 @@ jobs:
       - name: Correr script de registro
         run: node registro.js
 
-      - name: Subir QR y screenshot como artefacto
-        uses: actions/upload-artifact@v4
+      - name: Guardar QR en el repo
         if: always()
-        with:
-          name: qr-registro
-          path: |
-            *.png
-            *.jpg
-            *.jpeg
-            *.pdf
-          retention-days: 7
+        run: |
+          git config user.email "bot@github.com"
+          git config user.name "GitHub Actions"
+          git add *.png *.jpg *.jpeg *.html 2>/dev/null || true
+          git commit -m "QR generado automáticamente" || echo "Sin cambios"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
