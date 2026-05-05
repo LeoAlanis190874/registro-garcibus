@@ -33,6 +33,6 @@ permissions:
           git config user.name "GitHub Actions"
           git add *.png *.jpg *.jpeg *.html 2>/dev/null || true
           git commit -m "QR generado automáticamente" || echo "Sin cambios"
-          git push
+          git push origin HEAD:principal
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
