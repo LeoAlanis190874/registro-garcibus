@@ -6,7 +6,8 @@ on:
 jobs:
   registro:
     runs-on: ubuntu-latest
-
+permissions:
+      contents: write
     steps:
       - name: Checkout repositorio
         uses: actions/checkout@v4
